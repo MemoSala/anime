@@ -14,6 +14,7 @@ class AnimesInitialFatchEvent extends ObjectEvent {
     this.score,
     this.minScore,
     this.maxScore,
+    this.status,
     this.rating,
 
     /// Filter out Adult entries
@@ -51,6 +52,10 @@ class AnimesInitialFatchEvent extends ObjectEvent {
   /// "min_score" Set a minimum score for results.
   /// "max_score" Set a maximum  score for results.
   final double? score, minScore, maxScore;
+
+  /// Enum: "airing" "complete" "upcoming"
+  /// Available Anime statuses
+  final AnimeStatus? status;
 
   /// Enum: "g" "pg" "pg13" "r17" "r" "rx"
   /// Available Anime audience ratings
@@ -107,6 +112,7 @@ class AnimesInitialFatchEvent extends ObjectEvent {
       if (score != null) "score": "$score",
       if (minScore != null) "min_score": "$minScore",
       if (maxScore != null) "max_score": "$maxScore",
+      if (status != null) "status": status!.name,
       if (rating != null) "rating": rating!.name,
       if (sfw != null) "sfw": sfw!,
       if (genres != null) "genres": genres!,
@@ -125,4 +131,59 @@ class AnimesInitialFatchEvent extends ObjectEvent {
 class AnimeIdInitialFatchEvent extends ObjectEvent {
   final int id;
   AnimeIdInitialFatchEvent({required this.id});
+}
+
+class RecommendationsAnimeInitialFatchEvent extends ObjectEvent {
+  final int id;
+  RecommendationsAnimeInitialFatchEvent({required this.id});
+}
+
+class CharactersAnimeInitialFatchEvent extends ObjectEvent {
+  final int id;
+  CharactersAnimeInitialFatchEvent({required this.id});
+}
+
+class StaffAnimeInitialFatchEvent extends ObjectEvent {
+  final int id;
+  StaffAnimeInitialFatchEvent({required this.id});
+}
+
+class EpisodesAnimeInitialFatchEvent extends ObjectEvent {
+  final int id;
+  EpisodesAnimeInitialFatchEvent({required this.id});
+}
+
+class RelationsAnimeInitialFatchEvent extends ObjectEvent {
+  final int id;
+  RelationsAnimeInitialFatchEvent({required this.id});
+}
+
+class ImagesAnimeInitialFatchEvent extends ObjectEvent {
+  final int id;
+  ImagesAnimeInitialFatchEvent({required this.id});
+}
+
+class StatisticsAnimeInitialFatchEvent extends ObjectEvent {
+  final int id;
+  StatisticsAnimeInitialFatchEvent({required this.id});
+}
+
+class ReviewsAnimeInitialFatchEvent extends ObjectEvent {
+  final int id;
+  ReviewsAnimeInitialFatchEvent({required this.id});
+}
+
+class NewsAnimeInitialFatchEvent extends ObjectEvent {
+  final int id;
+  NewsAnimeInitialFatchEvent({required this.id});
+}
+
+class StreamingAnimeInitialFatchEvent extends ObjectEvent {
+  final int id;
+  StreamingAnimeInitialFatchEvent({required this.id});
+}
+
+class ExternalAnimeInitialFatchEvent extends ObjectEvent {
+  final int id;
+  ExternalAnimeInitialFatchEvent({required this.id});
 }

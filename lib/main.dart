@@ -18,22 +18,19 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       theme: ThemeData(
         focusColor: const Color.fromARGB(255, 0, 0, 0),
+        hintColor: Colors.white,
         appBarTheme: const AppBarTheme(
           backgroundColor: Color.fromARGB(255, 255, 255, 255),
           foregroundColor: Color.fromARGB(255, 0, 0, 0),
         ),
-        hintColor: Colors.white,
       ),
       darkTheme: ThemeData(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 15, 15, 15),
+        colorScheme: ColorScheme.dark(),
         focusColor: Colors.white,
         hintColor: Colors.grey.shade900,
         appBarTheme: const AppBarTheme(
           backgroundColor: Color.fromARGB(255, 30, 30, 30),
           foregroundColor: Color.fromARGB(255, 255, 255, 255),
-        ),
-        drawerTheme: const DrawerThemeData(
-          backgroundColor: Color.fromARGB(255, 30, 30, 30),
         ),
       ),
       getPages: routes,

@@ -2,20 +2,21 @@
 
 import 'package:flutter/material.dart';
 
-import '../../data/models/anime_id_model.dart';
+import '../../core/class/child_image.dart';
+import '../../data/models/anime_model.dart';
 import 'image_anime.dart';
 
 class CardAnime extends StatelessWidget {
   const CardAnime({
     super.key,
     required this.anime,
-    required this.text,
     required this.onPressed,
-    this.childImage,
+    this.text,
+    this.childImage = ChildImage.none,
   });
-  final AnimeIdModel anime;
-  final String text;
-  final Widget? childImage;
+  final AnimeModel anime;
+  final String? text;
+  final ChildImage childImage;
   final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
@@ -29,42 +30,65 @@ class CardAnime extends StatelessWidget {
           ImageAnime(
             size: width / 2 - 8,
             imageUrl: anime.images.first.imageUrl,
-            child:
-                childImage ??
-                Container(
-                  height: 20,
-                  constraints: BoxConstraints(minWidth: 50),
-                  margin: const EdgeInsets.all(5),
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 2,
-                    horizontal: 5,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.yellow.shade600,
-                  ),
-                  child: Text(
-                    "${anime.episodes} حلقه",
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+            child: _childImage,
           ),
           TextCardAnime(
             anime.title,
             style: TextStyle(color: Theme.of(context).focusColor),
           ),
-          TextCardAnime(
-            text,
-            style: const TextStyle(color: Colors.grey, fontSize: 11),
-          ),
+          if (text != null)
+            TextCardAnime(
+              text!,
+              style: const TextStyle(color: Colors.grey, fontSize: 11),
+            ),
+          if (text == null) SizedBox(height: 5),
           SizedBox(),
         ],
       ),
     );
+  }
+
+  Widget? get _childImage {
+    switch (childImage) {
+      case ChildImage.episodes:
+        return Container(
+          height: 20,
+          constraints: BoxConstraints(minWidth: 50),
+          margin: const EdgeInsets.all(5),
+          padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: Colors.yellow.shade600,
+          ),
+          child: Text(
+            "${anime.episodes} حلقه",
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+          ),
+        );
+      case ChildImage.score:
+        return Padding(
+          padding: const EdgeInsets.all(5),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.star,
+                color: Colors.yellow.shade600,
+                shadows: [Shadow(blurRadius: 2)],
+                size: 14,
+              ),
+              SizedBox(width: 5),
+              Text(
+                "${anime.score}",
+                style: TextStyle(color: Colors.yellow.shade600),
+              ),
+            ],
+          ),
+        );
+      case ChildImage.none:
+        return null;
+    }
   }
 }
 

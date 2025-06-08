@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/consts/routes_app.dart';
-import '../../data/models/anime_id_model.dart';
+import '../../data/models/anime_model.dart';
 
 class AnimeDialog extends StatelessWidget {
   const AnimeDialog({super.key, required this.anime});
 
-  final AnimeIdModel anime;
+  final AnimeModel anime;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class AnimeDialog extends StatelessWidget {
                         ),
                         image: DecorationImage(
                           image: NetworkImage(
-                            anime.trailer!.images.largeImageUrl,
+                            anime.trailer!.images.largeImageUrl!,
                           ),
                           fit: BoxFit.cover,
                         ),

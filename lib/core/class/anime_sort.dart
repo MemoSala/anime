@@ -1,0 +1,1 @@
+enum AnimeSort { desc, asc }

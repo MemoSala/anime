@@ -3,13 +3,13 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/function/translator.dart';
-import '../../../data/models/anime_id_model.dart';
+import '../../../data/models/anime_model.dart';
 import '../image_anime.dart';
 
 class HeaderAnime extends StatelessWidget {
   const HeaderAnime({super.key, required this.anime});
 
-  final AnimeIdModel anime;
+  final AnimeModel anime;
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
@@ -23,7 +23,7 @@ class HeaderAnime extends StatelessWidget {
               height: 224,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(anime.trailer!.images.largeImageUrl),
+                  image: NetworkImage(anime.trailer!.images.largeImageUrl!),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -89,29 +89,19 @@ class HeaderAnime extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "${anime.type}   •   ${anime.episodes}  حلقه",
+                      "${anime.typeToString}   •   ${anime.episodes}  حلقه",
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(color: Colors.grey, fontSize: 11),
                     ),
                     Text(
-                      anime.rating,
+                      "${anime.ratingToString}   •   ${anime.statusToString}",
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(color: Colors.grey, fontSize: 11),
                     ),
-                    FutureBuilder(
-                      future: translator(anime.status),
-                      builder: (context, snapshot) {
-                        return Text(
-                          snapshot.hasData
-                              ? "${snapshot.data ?? ""}   •   ${translatorS(anime.season) ?? ""} ${anime.year ?? ""}"
-                              : "${translatorS(anime.season) ?? ""} ${anime.year ?? ""}",
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: Colors.grey,
-                            fontSize: 11,
-                          ),
-                        );
-                      },
+                    Text(
+                      "${translatorS(anime.season) ?? ""} ${anime.year ?? ""}",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.grey, fontSize: 11),
                     ),
                   ],
                 ),

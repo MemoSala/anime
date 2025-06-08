@@ -5,6 +5,20 @@ Future<String?> translator(String? sourceText) async {
     switch (sourceText) {
       case "Action":
         return "أكشين";
+      case "Prequel":
+        return "السابق";
+      case "Sequel":
+        return "تكملة";
+      case "Adaptation":
+        return "مقتبس منه";
+      case "Summary":
+        return "ملخص";
+      case "Full Story":
+        return "القصه كملة";
+      case "Side Story":
+        return "قصه جانبية";
+      case "Other":
+        return "آخر";
       default:
         GoogleTranslator translator = GoogleTranslator();
         return (await translator.translate(
@@ -14,7 +28,7 @@ Future<String?> translator(String? sourceText) async {
         )).text;
     }
   }
-  return null; //
+  return null;
 }
 
 String? translatorS(String? sourceText) {

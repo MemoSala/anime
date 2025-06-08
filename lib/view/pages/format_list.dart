@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/format_list_controller.dart';
-import '../widgets/home/drawer_home.dart';
-import '../widgets/home/home_body.dart';
+import '../../data/api/object_bloc.dart';
+import '../widgets/drawer_app.dart';
+import '../widgets/animes_view.dart';
 
 class FormatList extends StatelessWidget {
   const FormatList({super.key});
@@ -16,17 +17,24 @@ class FormatList extends StatelessWidget {
       appBar: AppBar(
         title: const Text("قائمة الأنمى"),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+          IconButton(
+            onPressed: controller.goToSearch,
+            icon: const Icon(Icons.search),
+          ),
           const SizedBox(width: 5),
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.filter_alt_outlined),
+            onPressed: controller.editBoxList,
+            icon: const Icon(Icons.format_list_bulleted),
           ),
           const SizedBox(width: 10),
         ],
       ),
-      drawer: const DrawerHome(enumDrawer: EnumDrawer.formatListBulleted),
-      body: HomeBody(bloc: controller.objectBloc),
+      drawer: const DrawerApp(enumDrawer: EnumDrawer.formatListBulleted),
+      body: AnimesView<AnimesInitialFatchEvent>(
+        onError: controller.getBloc,
+        bloc: controller.objectBloc,
+        onPressed: controller.goToAnime,
+      ),
     );
   }
 }
